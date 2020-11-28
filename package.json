@@ -1,7 +1,6 @@
 {
   "name": "kos.engine_controller",
   "version": "1.0.0",
-  "description": "",
   "main": "main-code.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,5 +9,15 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^12.5.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Delta-official/K-bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Delta-official/K-bot/issues"
+  },
+  "homepage": "https://github.com/Delta-official/K-bot#readme",
+  "description": ""
 }
