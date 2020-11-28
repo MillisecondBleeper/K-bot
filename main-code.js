@@ -10,6 +10,8 @@ const ADMIN_PERMISSIONS = [
     'VIEW_AUDIT_LOG',
     'MANAGE_MESSAGES',
 ];
+const BasementKeys = "782340321383940147"
+const inBasement = "777177250789326880"
 
 
 const client = new Discord.Client()
@@ -50,6 +52,16 @@ client.on('message', async(message) => {
                 
             }
         }
+        if(command === "basement") {
+            if(hasBasementKeys(message.member)) {
+                const goToBasement = message.mentions.users.first()
+                if(!goToBasement.roles.cache.has(inBasement)) {
+                    goToBasement.roles.add(inBasement)
+                } else {
+                    goToBasement.removeRole(inBasement)
+                }
+            }
+        }
         if(command == "darkuss") {
             message.channel.send("Look on my works, ye Mighty, and despair!")
         }
@@ -58,6 +70,9 @@ client.on('message', async(message) => {
 
 function isStaff(member) {
     return member.hasPermission(ADMIN_PERMISSIONS) || member.id === OWNER_ID;
+}
+function hasBasementKeys(member) {
+    return member.roles.cache.has(BasementKeys)
 }
 function banuser() {
     message.guild.ban(banned_user)
