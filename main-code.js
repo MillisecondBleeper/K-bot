@@ -40,7 +40,7 @@ client.on('message', async(message) => {
                         // reaction.name doesn't exist, problem #1
                         console.log(`User banned`);
                         client.channels.cache.get()
-                        setTimeout((message.guild.ban(banned_user), 10000))
+                        setTimeout((banuser()), 10000)
                     })
                 })
             }
@@ -58,6 +58,9 @@ client.on('message', async(message) => {
 
 function isStaff(member) {
     return member.hasPermission(ADMIN_PERMISSIONS) || member.id === OWNER_ID;
+}
+function banuser() {
+    message.guild.ban(banned_user)
 }
 
 client.login(process.env.token)
