@@ -10,16 +10,22 @@ const ADMIN_PERMISSIONS = [
     'VIEW_AUDIT_LOG',
     'MANAGE_MESSAGES',
 ];
-const BasementKeys = "782340321383940147"
-const inBasement = "777177250789326880"
 
+const kServer_ID = "777175140647174154"
 
 const client = new Discord.Client()
 
+let BasementKeys
+let inBasement
 client.on("ready", () => {
     console.log("beep boop fuck you i'm already alive \r michael reeves style")
     console.log("the server is ready to be overtaken")
     client.user.setActivity("with kRandom | k-help")
+
+    client.guilds.fetch(kServer_ID).then((KGuild) => {
+        BasementKeys = KGuild.roles.cache.find(BasementKeys => BasementKeys === "782340321383940147");
+        inBasement = KGuild.roles.cache.find(inBasement => inBasement === "777177250789326880")
+    });
 })
 
 prefix = "k-"
