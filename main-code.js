@@ -16,7 +16,7 @@ const client = new Discord.Client()
 
 client.on("ready", () => {
     console.log("beep boop fuck you i'm already alive \r michael reeves style")
-    console.log("\r \r \rthe server is ready to be overtaken")
+    console.log("the server is ready to be overtaken")
     client.user.setActivity("with kRandom | k-help")
 })
 
