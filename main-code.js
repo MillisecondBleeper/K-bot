@@ -10,9 +10,9 @@ const ADMIN_PERMISSIONS = [
     'VIEW_AUDIT_LOG',
     'MANAGE_MESSAGES',
 ];
-
 const kServer_ID = "777175140647174154"
 
+const get_krandom_guild = client.guilds.cache.get(kServer_ID)
 const client = new Discord.Client()
 
 let BasementKeys
@@ -87,7 +87,7 @@ function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys)
 }
 function banuser() {
-    message.guild.ban(banned_user)
+    get_krandom_guild.ban(banned_user)
 }
 
 client.login(process.env.token)
