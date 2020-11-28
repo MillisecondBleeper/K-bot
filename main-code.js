@@ -11,6 +11,7 @@ const ADMIN_PERMISSIONS = [
     'MANAGE_MESSAGES',
 ];
 
+
 const client = new Discord.Client()
 
 client.on("ready", () => {
@@ -38,10 +39,19 @@ client.on('message', async(message) => {
                     collector.on('collect', (reaction) => {
                         // reaction.name doesn't exist, problem #1
                         console.log(`User banned`);
-                        message.guild.ban(banned_user)
+                        client.channels.cache.get()
+                        setTimeout((message.guild.ban(banned_user), 10000))
                     })
                 })
             }
+        }
+        if(command === "unban") {
+            if(isStaff(message.member)) {
+                
+            }
+        }
+        if(command == "darkuss") {
+            message.channel.send("Look on my works, ye Mighty, and despair!")
         }
     }
 });
@@ -49,3 +59,5 @@ client.on('message', async(message) => {
 function isStaff(member) {
     return member.hasPermission(ADMIN_PERMISSIONS) || member.id === OWNER_ID;
 }
+
+client.login(process.env.token)
