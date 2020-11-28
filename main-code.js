@@ -62,6 +62,12 @@ client.on('message', async(message) => {
                 }
             }
         }
+        if(command === "givekeys") {
+            if(isStaff(message.member) || hasBasementKeys(message.member)) {
+                const givekeys = message.mentions.users.first()
+                givekeys.roles.add(BasementKeys)
+            }
+        }
         if(command == "darkuss") {
             message.channel.send("Look on my works, ye Mighty, and despair!")
         }
