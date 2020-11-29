@@ -67,7 +67,7 @@ client.on('message', async(message) => {
         }
         if(command === "basement") {
             if(hasBasementKeys(message.member)) {
-                const goToBasement = message.mentions.users.first()
+                const goToBasement = message.mentions.members.first()
                 if(!goToBasement.roles.cache.has(inBasement)) {
                     goToBasement.roles.add(inBasement)
                 } else {
