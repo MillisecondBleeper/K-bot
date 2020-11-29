@@ -11,8 +11,8 @@ const ADMIN_PERMISSIONS = [
     'MANAGE_MESSAGES',
 ];
 const kServer_ID = "777175140647174154"
+const kBot_log_channel_id = "782340321383940147"
 
-const get_krandom_guild = client.guilds.cache.get(kServer_ID)
 const client = new Discord.Client()
 
 let BasementKeys
@@ -21,12 +21,15 @@ client.on("ready", () => {
     console.log("beep boop fuck you i'm already alive \r michael reeves style")
     console.log("the server is ready to be overtaken")
     client.user.setActivity("with kRandom | k-help")
-
+     
+    
     client.guilds.fetch(kServer_ID).then((KGuild) => {
         BasementKeys = KGuild.roles.cache.find(BasementKeys => BasementKeys === "782340321383940147");
         inBasement = KGuild.roles.cache.find(inBasement => inBasement === "777177250789326880")
     });
 })
+
+const get_krandom_guild = client.guilds.cache.get(kServer_ID)
 
 prefix = "k-"
 
@@ -47,7 +50,10 @@ client.on('message', async(message) => {
                     collector.on('collect', (reaction) => {
                         // reaction.name doesn't exist, problem #1
                         console.log(`User banned`);
-                        client.channels.cache.get()
+                        const ban_embed = new Discord.MessageEmbed()
+                        .setTitle(`${banned_user} has been banned`)
+                        .setDescription(`Banned user id: ${banned_user.id}`)
+                        client.channels.cache.get(kBot_log_channel_id).send(ban_embed)
                         setTimeout((banuser()), 10000)
                     })
                 })
