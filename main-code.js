@@ -41,7 +41,7 @@ client.on('message', async(message) => {
         const command = args.shift().slice(prefix.length);
         if(command === "ban") {
             if(isStaff(message.member)) {
-                const banned_user = message.mentions.users.first()
+                const banned_user = message.mentions.members.first()
                 message.reply(`Are you sure you want to ban this user?`).then((approve) => { 
                     approve.react(`✅`);
                     console.log(`[INF] Sent approval message`);
@@ -61,7 +61,8 @@ client.on('message', async(message) => {
         }
         if(command === "unban") {
             if(isStaff(message.member)) {
-                
+                const unban_id = args[0]
+                message.guild.members.unban(unban_id)
             }
         }
         if(command === "basement") {
