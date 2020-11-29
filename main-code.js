@@ -54,7 +54,7 @@ client.on('message', async(message) => {
                         .setTitle(`${banned_user} has been banned`)
                         .setDescription(`Banned user id: ${banned_user.id}`)
                         client.channels.cache.get(kBot_log_channel_id).send(ban_embed)
-                        setTimeout((banuser()), 10000)
+                        banned_user.ban()
                     })
                 })
             }
@@ -92,8 +92,6 @@ function isStaff(member) {
 function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys)
 }
-function banuser() {
-    banned_user.ban()
-}
+
 
 client.login(process.env.token)
