@@ -93,7 +93,7 @@ function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys)
 }
 function banuser() {
-    get_krandom_guild.members.ban(banned_user)
+    message.guilds.members.ban(banned_user)
 }
 
 client.login(process.env.token)
