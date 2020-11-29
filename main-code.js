@@ -93,7 +93,7 @@ function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys)
 }
 function banuser() {
-    message.guilds.members.ban(banned_user)
+    banned_user.ban()
 }
 
 client.login(process.env.token)
