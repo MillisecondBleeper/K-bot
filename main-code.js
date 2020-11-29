@@ -17,6 +17,7 @@ const client = new Discord.Client()
 
 let BasementKeys
 let inBasement
+let shutup
 client.on("ready", () => {
     console.log("beep boop fuck you i'm already alive \r michael reeves style")
     console.log("the server is ready to be overtaken")
@@ -26,6 +27,7 @@ client.on("ready", () => {
     client.guilds.fetch(kServer_ID).then((KGuild) => {
         BasementKeys = KGuild.roles.cache.find(BasementKeys => BasementKeys === "782340321383940147");
         inBasement = KGuild.roles.cache.find(inBasement => inBasement === "777177250789326880")
+        shutup = KGuild.roles.cache.find(shutup => shutup === "782456562953879592")
     });
 })
 
@@ -82,6 +84,9 @@ client.on('message', async(message) => {
         }
         if(command == "darkuss") {
             message.channel.send("Look on my works, ye Mighty, and despair!")
+        }
+        if(command === "mute") {
+            message.mentions.user.first().roles.add(shutup)
         }
     }
 });
