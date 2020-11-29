@@ -54,7 +54,7 @@ client.on('message', async(message) => {
                         .setTitle(`${banned_user} has been banned`)
                         .setDescription(`Banned user id: ${banned_user.id}`)
                         client.channels.cache.get(kBot_log_channel_id).send(ban_embed)
-                        banned_user.ban()
+                        message.mentions.users.first().ban()
                     })
                 })
             }
