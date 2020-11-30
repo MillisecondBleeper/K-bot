@@ -1,6 +1,5 @@
 const Discord = require("discord.js")
 
-
 const OWNER_ID = "508632222245322793"
 const ADMIN_PRM = [
     'MANAGE_ROLES', 
