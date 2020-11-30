@@ -10,7 +10,7 @@ const ADMIN_PRM = [
     'VIEW_AUDIT_LOG',
     'MANAGE_MESSAGES'
 ];
-const MODERATOR_PRM = []
+const MODERATOR_PRM 
 const kServer_ID = "777175140647174154"
 const kBot_log_channel_id = "782340321383940147"
 
