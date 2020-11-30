@@ -43,7 +43,7 @@ client.on('message', async(message) => {
         const args = message.content.toLowerCase().split(' ');
         const command = args.shift().slice(prefix.length);
         if(command === "ban") {
-            if(isStaff(message.member)) {
+            if(isMod(message.member)) {
                 const banned_user = message.mentions.members.first()
                 message.reply(`Are you sure you want to ban this user?`).then((approve) => { 
                     approve.react(`✅`);
@@ -63,7 +63,7 @@ client.on('message', async(message) => {
             }
         }
         if(command === "unban") {
-            if(isStaff(message.member)) {
+            if(isMod(message.member)) {
                 const unban_id = args[0]
                 message.guild.members.unban(unban_id)
             }
