@@ -1,7 +1,5 @@
 const Discord = require("discord.js")
 
-a
-
 const OWNER_ID = "508632222245322793"
 const ADMIN_PRM = [
     'MANAGE_ROLES', 
@@ -12,7 +10,7 @@ const ADMIN_PRM = [
     'VIEW_AUDIT_LOG',
     'MANAGE_MESSAGES'
 ];
-const MODERATOR_PRM = []
+const MODERATOR_PRM 
 const kServer_ID = "777175140647174154"
 const kBot_log_channel_id = "782340321383940147"
 
