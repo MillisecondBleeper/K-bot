@@ -1,10 +1,10 @@
 const Discord = require("discord.js")
 
 
-
+a
 
 const OWNER_ID = "508632222245322793"
-const ADMIN_PERMISSIONS = [
+const ADMIN_PRM = [
     'MANAGE_ROLES', 
     'MANAGE_CHANNELS', 
     'BAN_MEMBERS', 
@@ -13,7 +13,7 @@ const ADMIN_PERMISSIONS = [
     'VIEW_AUDIT_LOG',
     'MANAGE_MESSAGES'
 ];
-const MODERATOR_PRM
+const MODERATOR_PRM = []
 const kServer_ID = "777175140647174154"
 const kBot_log_channel_id = "782340321383940147"
 
@@ -95,8 +95,8 @@ client.on('message', async(message) => {
     }
 });
 
-function isStaff(member) {
-    return member.hasPermission(ADMIN_PERMISSIONS) || member.id === OWNER_ID;
+function isMod(member) {
+    return member.hasPermission(MODERATOR_PRM) || member.id === OWNER_ID;
 }
 function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys)
