@@ -1,5 +1,8 @@
 const Discord = require("discord.js")
 
+
+
+
 const OWNER_ID = "508632222245322793"
 const ADMIN_PERMISSIONS = [
     'MANAGE_ROLES', 
@@ -8,8 +11,9 @@ const ADMIN_PERMISSIONS = [
     'KICK_MEMBERS',
     'MANAGE_GUILD',
     'VIEW_AUDIT_LOG',
-    'MANAGE_MESSAGES',
+    'MANAGE_MESSAGES'
 ];
+const MODERATOR_PRM
 const kServer_ID = "777175140647174154"
 const kBot_log_channel_id = "782340321383940147"
 
