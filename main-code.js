@@ -50,8 +50,8 @@ client.on('message', async(message) => {
         if (command === "ban") {
             const banned_user = message.mentions.members.first();
             if (canBan(message.member) && banned_user !== undefined) {
-                args.shift();
-                const reason = args.join();
+                var e = message.split(' ', 3);
+                const reason = (e.size === 3)?e[2]:'';
                 const confirm_embed = new Discord.MessageEmbed()
                     .setColor('#1F8B4C')
                     .setTitle(`Are you sure you want to ban this user?`)
