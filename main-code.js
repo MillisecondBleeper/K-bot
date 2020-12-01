@@ -47,10 +47,10 @@ client.on('message', async(message) => {
         const args = message.content.toLowerCase().split(' ');
         const command = args.shift().slice(prefix.length);
         if (command === "ban") {
+            const banned_user = message.mentions.members.first();
             if (isMod(message.member) && banned_user !== undefined) {
                 args.shift();
                 const reason = args.join();
-                const banned_user = message.mentions.members.first();
                 const confirm_embed = new Discord.MessageEmbed()
                     .setColor('#1F8B4C')
                     .setTitle(`Are you sure you want to ban this user?`)
@@ -70,7 +70,7 @@ client.on('message', async(message) => {
                                 .setDescription(`Banned User Id: **${banned_user.id}**`)
                                 .addFields(
                                     { name: '\u200B', value: '\u200B' },
-                                    { name: 'Reason', value: reason, inline: true },
+                                    { name: 'Reason', value: ""+reason, inline: true },
                                     { name: 'Moderator', value: getName(message.member.user), inline: true }
                                 );
                             client.channels.cache.get(kBot_log_channel_id).send(ban_embed);
