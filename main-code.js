@@ -58,7 +58,7 @@ client.on('message', async(message) => {
                     .setDescription(`User:  **${getName(banned_user.user)}**\nId:  **${banned_user.id}**`);
                 message.reply(confirm_embed).then((approve) => { 
                     approve.react(`✅`).then( () => approve.react(`❌`) );
-                    console.log(`[INF] Sent approval message`);
+                    console.log(`[INFO ${new Date()}] Sent approval message`);
                     const filter = (reaction, reactor) => { return (reaction.emoji.name === `✅` || reaction.emoji.name === `❌`)&& reactor.id === member.id };
                     let collector = approve.createReactionCollector(filter, { max: 1, time: 120000 });
                     collector.on('collect', (reaction) => {
@@ -75,7 +75,7 @@ client.on('message', async(message) => {
                                     { name: 'Moderator', value: getName(message.member.user), inline: true }
                                 );
                             client.channels.cache.get(kBot_log_channel_id).send(ban_embed);
-                            banned_user.ban();
+                            banned_user.ban().catch((e) => { console.log(`[WARNING ${new Date()}] Ban failed for user ${getName(message.member.user)}`) });
                         }
                     });
                     collector.on('end', (collected) => {
