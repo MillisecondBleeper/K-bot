@@ -110,6 +110,4 @@ function hasBasementKeys(member) {
 }
 
 // huge thanks to IGunner222#9497 for contributing to this bot!
-client.login(process.env.token)
-
 client.login(process.env.token);
