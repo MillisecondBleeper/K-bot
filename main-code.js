@@ -103,5 +103,5 @@ function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys)
 }
 
-
+// huge thanks to IGunner222#9497 for contributing to this bot!
 client.login(process.env.token)
