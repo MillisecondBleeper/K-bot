@@ -46,10 +46,16 @@ client.on('message', async(message) => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.toLowerCase().split(' ');
         const command = args.shift().slice(prefix.length);
-        if(command === "ban") {
-            const banned_user = message.mentions.members.first();
-            if(isMod(message.member) && banned_user !== undefined) {
-                message.reply(`Are you sure you want to ban this user?`).then((approve) => { 
+        if (command === "ban") {
+            if (isMod(message.member) && banned_user !== undefined) {
+                args.shift();
+                const reason = args.join();
+                const banned_user = message.mentions.members.first();
+                const confirm_embed = new Discord.MessageEmbed()
+                    .setColor('#1F8B4C')
+                    .setTitle(`Are you sure you want to ban this user?`)
+                    .setDescription(`User:  **${getName(banned_user.user)}**\nId:  **${banned_user.id}**`);
+                message.reply(confirm_embed).then((approve) => { 
                     approve.react(`✅`).then( () => approve.react(`❌`) );
                     console.log(`[INF] Sent approval message`);
                     const filter = (reaction, reactor) => { return (reaction.emoji.name === `✅` || reaction.emoji.name === `❌`)&& reactor.id === member.id };
@@ -58,8 +64,15 @@ client.on('message', async(message) => {
                         if(reaction.emoji.name === `✅`) {
                             console.log(`[INFO ${new Date()}] User banned`);
                             const ban_embed = new Discord.MessageEmbed()
-                                .setTitle(`${banned_user} has been banned`)
-                                .setDescription(`Banned user id: ${banned_user.id}`)
+                                .setColor('#1F8B4C')
+                                .setTitle(`User ${getName(banned_user.user)} has been banned`)
+                                .setTimestamp()
+                                .setDescription(`Banned User Id: **${banned_user.id}**`)
+                                .addFields(
+                                    { name: '\u200B', value: '\u200B' },
+                                    { name: 'Reason', value: reason, inline: true },
+                                    { name: 'Moderator', value: getName(message.member.user), inline: true }
+                                );
                             client.channels.cache.get(kBot_log_channel_id).send(ban_embed);
                             banned_user.ban();
                         }
@@ -107,6 +120,9 @@ function isMod(member) {
 }
 function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys);
+}
+function getName(user) {
+    return `@${user.username}#${user.discriminator}`;
 }
 
 // huge thanks to IGunner222#9497 for contributing to this bot!
