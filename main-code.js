@@ -10,11 +10,12 @@ const ADMIN_PRM = [
     'VIEW_AUDIT_LOG',
     'MANAGE_MESSAGES'
 ];
-const MODERATOR_PRM = [
-    'KICK_MEMBERS',
-    'VIEW_AUDIT_LOG',
-    'MANAGE_MESSAGES'
-];
+const BAN_PRM = [
+    'BAN_MEMBERS'
+]
+const KICK_PRM = [
+    'KICK_MEMBERS'
+]
 const kServer_ID = "777175140647174154";
 const kBot_log_channel_id = "782340321383940147";
 
@@ -48,7 +49,7 @@ client.on('message', async(message) => {
         const command = args.shift().slice(prefix.length);
         if (command === "ban") {
             const banned_user = message.mentions.members.first();
-            if (isMod(message.member) && banned_user !== undefined) {
+            if (canBan(message.member) && banned_user !== undefined) {
                 var e = message.split(' ', 3);
                 const reason = (e.size === 3)?e[2]:'';
                 const confirm_embed = new Discord.MessageEmbed()
@@ -86,7 +87,7 @@ client.on('message', async(message) => {
             }
         }
         if(command === "unban") {
-            if(isMod(message.member)) {
+            if(canBan(message.member)) {
                 const unban_id = args[0];
                 message.guild.members.unban(unban_id);
             }
@@ -117,6 +118,12 @@ client.on('message', async(message) => {
 
 function isMod(member) {
     return member.hasPermission(MODERATOR_PRM) || member.id === OWNER_ID;
+}
+function canBan(member) {
+    return member.hasPermission(BAN_PRM) || member.id === OWNER_ID;
+}
+function canKick(member) {
+    return member.hasPermission(KICK_PRM) || member.id === OWNER_ID;
 }
 function hasBasementKeys(member) {
     return member.roles.cache.has(BasementKeys);
