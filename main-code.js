@@ -57,8 +57,8 @@ client.on('message', async(message) => {
                     collector.on('collect', (reaction) => {
                         if(reaction.emoji.name === `✅`) {
                             console.log(`[INFO ${new Date()}] User banned`);
-                            const ban_embed = new Discord.MessageEmbed()
-                                .setTitle(`${banned_user} has been banned`)
+                            const ban_embed = new Discord.MessageEmbed();
+                                .setTitle(`${banned_user} has been banned`);
                                 .setDescription(`Banned user id: ${banned_user.id}`);
                             client.channels.cache.get(kBot_log_channel_id).send(ban_embed);
                             banned_user.ban();
@@ -110,4 +110,4 @@ function hasBasementKeys(member) {
 }
 
 // huge thanks to IGunner222#9497 for contributing to this bot!
-client.login(process.env.token);
+client.login(process.env.token)
