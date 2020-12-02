@@ -111,7 +111,8 @@ client.on('message', async(message) => {
             message.channel.send("Look on my works, ye Mighty, and despair!");
         }
         if(command === "mute") {
-            message.mentions.user.first().roles.add(shutup);
+            const muted_user = message.mentions.user.first()
+            muted_user.roles.add(shutup);
         }
     }
 });
