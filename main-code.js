@@ -66,7 +66,7 @@ client.on('message', async(message) => {
                             console.log(`[INFO ${new Date()}] User banned`);
                             const ban_embed = new Discord.MessageEmbed()
                                 .setColor('#1F8B4C')
-                                .setTitle(`User ${getName(banned_user.user)} has been banned`)
+                                .setTitle(`User **${getName(banned_user.user)}** has been banned`)
                                 .setTimestamp()
                                 .setDescription(`Banned User Id: **${banned_user.id}**`)
                                 .addFields(
