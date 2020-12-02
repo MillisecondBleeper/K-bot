@@ -28,7 +28,6 @@ client.on("ready", () => {
     console.log("beep boop fuck you i'm already alive \r\n michael reeves style");
     console.log("the server is ready to be overtaken");
     client.user.setActivity("with kRandom | k-help");
-     
     
     client.guilds.fetch(kServer_ID).then((KGuild) => {
         BasementKeys = KGuild.roles.cache.find(BasementKeys => BasementKeys === "782340321383940147");
@@ -62,24 +61,39 @@ client.on('message', async(message) => {
                     const filter = (reaction, reactor) => { return (reaction.emoji.name === `✅` || reaction.emoji.name === `❌`)&& reactor.id === message.member.id };
                     let collector = approve.createReactionCollector(filter, { max: 1, time: 120000 });
                     collector.on('collect', (reaction) => {
-                        if(reaction.emoji.name === `✅`) {
+                        if (reaction.emoji.name === `✅`) {
                             console.log(`[INFO ${new Date()}] User banned`);
                             const ban_embed = new Discord.MessageEmbed()
                                 .setColor('#1F8B4C')
-                                .setTitle(`User **${getName(banned_user.user)}** has been banned`)
+                                .setTitle(`User **${getName(banned_user.user)}** was banned`)
                                 .setTimestamp()
                                 .setDescription(`Banned User Id: **${banned_user.id}**`)
                                 .addFields(
-                                    { name: 'Reason', value: ""+reason, inline: true },
+                                    { name: 'Reason', value: "" + reason, inline: true },
                                     { name: 'Moderator', value: getName(message.member.user), inline: true }
                                 );
                             client.channels.cache.get(kBot_log_channel_id).send(ban_embed);
                             banned_user.ban().catch((e) => { console.log(`[WARNING ${new Date()}] Ban failed for user ${getName(message.member.user)}`) });
+
+                            const accept_embed = new Discord.MessageEmbed()
+                                .setColor('#1F8B4C')
+                                .setTitle(`✅ *User **${getName(banned_user.user)}** was banned*`);
+                            approve.edit(accept_embed);
                         }
+                        else {
+                            const deny_embed = new Discord.MessageEmbed()
+                                .setColor('#1F8B4C')
+                                .setTitle(`❌ *User **${getName(banned_user.user)}** was not banned*`);
+                            approve.edit(deny_embed);
+                        }
+                        approve.reactions.removeAll().catch((e) => (0));
                     });
                     collector.on('end', (collected) => {
                         if(collected.size == 0) {
-                            
+                            const timeout_embed = new Discord.MessageEmbed()
+                                .setColor('#1F8B4C')
+                                .setTitle(`❌ *Request to ban user **${getName(banned_user.user)}** timed out*`);
+                            approve.edit(deny_embed);
                         }
                     });
                 });
@@ -88,7 +102,9 @@ client.on('message', async(message) => {
         if(command === "unban") {
             if(canBan(message.member)) {
                 const unban_id = args[0];
-                message.guild.members.unban(unban_id);
+                if (unban_id) {
+                    message.guild.members.unban(unban_id);
+                }
             }
         }
         if(command === "basement") {
@@ -111,7 +127,9 @@ client.on('message', async(message) => {
         }
         if(command === "mute") {
             const muted_user = message.mentions.user.first()
-            muted_user.roles.add(shutup);
+            if (muted_user) {
+                muted_user.roles.add(shutup);
+            }
         }
     }
 });
