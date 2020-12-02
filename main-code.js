@@ -50,7 +50,7 @@ client.on('message', async(message) => {
         if (command === "ban") {
             const banned_user = message.mentions.members.first();
             if (canBan(message.member) && banned_user !== undefined) {
-                var e = message.split(' ', 3);
+                var e = message.content.split(' ', 3);
                 const reason = (e.size === 3)?e[2]:'';
                 const confirm_embed = new Discord.MessageEmbed()
                     .setColor('#1F8B4C')
@@ -59,18 +59,17 @@ client.on('message', async(message) => {
                 message.reply(confirm_embed).then((approve) => { 
                     approve.react(`✅`).then( () => approve.react(`❌`) );
                     console.log(`[INFO ${new Date()}] Sent approval message`);
-                    const filter = (reaction, reactor) => { return (reaction.emoji.name === `✅` || reaction.emoji.name === `❌`)&& reactor.id === member.id };
+                    const filter = (reaction, reactor) => { return (reaction.emoji.name === `✅` || reaction.emoji.name === `❌`)&& reactor.id === message.member.id };
                     let collector = approve.createReactionCollector(filter, { max: 1, time: 120000 });
                     collector.on('collect', (reaction) => {
                         if(reaction.emoji.name === `✅`) {
                             console.log(`[INFO ${new Date()}] User banned`);
                             const ban_embed = new Discord.MessageEmbed()
                                 .setColor('#1F8B4C')
-                                .setTitle(`User ${getName(banned_user.user)} has been banned`)
+                                .setTitle(`User **${getName(banned_user.user)}** has been banned`)
                                 .setTimestamp()
                                 .setDescription(`Banned User Id: **${banned_user.id}**`)
                                 .addFields(
-                                    { name: '\u200B', value: '\u200B' },
                                     { name: 'Reason', value: ""+reason, inline: true },
                                     { name: 'Moderator', value: getName(message.member.user), inline: true }
                                 );
@@ -111,7 +110,8 @@ client.on('message', async(message) => {
             message.channel.send("Look on my works, ye Mighty, and despair!");
         }
         if(command === "mute") {
-            message.mentions.user.first().roles.add(shutup);
+            const muted_user = message.mentions.user.first()
+            muted_user.roles.add(shutup);
         }
     }
 });
