@@ -59,7 +59,7 @@ client.on('message', async(message) => {
                 message.reply(confirm_embed).then((approve) => { 
                     approve.react(`✅`).then( () => approve.react(`❌`) );
                     console.log(`[INFO ${new Date()}] Sent approval message`);
-                    const filter = (reaction, reactor) => { return (reaction.emoji.name === `✅` || reaction.emoji.name === `❌`)&& reactor.id === member.id };
+                    const filter = (reaction, reactor) => { return (reaction.emoji.name === `✅` || reaction.emoji.name === `❌`)&& reactor.id === message.member.id };
                     let collector = approve.createReactionCollector(filter, { max: 1, time: 120000 });
                     collector.on('collect', (reaction) => {
                         if(reaction.emoji.name === `✅`) {
