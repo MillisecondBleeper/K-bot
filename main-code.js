@@ -70,7 +70,6 @@ client.on('message', async(message) => {
                                 .setTimestamp()
                                 .setDescription(`Banned User Id: **${banned_user.id}**`)
                                 .addFields(
-                                    { name: '⠀', value: '⠀' },
                                     { name: 'Reason', value: ""+reason, inline: true },
                                     { name: 'Moderator', value: getName(message.member.user), inline: true }
                                 );
